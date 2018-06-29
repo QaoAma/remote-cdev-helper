@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aucad</title>
+</head>
+<body>
+    <form>
+        <ul id="list"></ul>
+        <button type="button" onclick="get_update_list()">upload</button>
+    </form>
+    <script>
+        function get_update_list()
+        {
+            const vscode = acquireVsCodeApi();
+            var fileInfos = document.forms[0].fileInfo;
+            var selectedFiles = new Array();
+            for(let i = 0; i < fileInfos.length; ++i)
+            {
+                if(fileInfos[i].checked)
+                {
+                    selectedFiles.push(fileInfos[i].value);
+                }
+            }
+            vscode.postMessage({
+                    command:'upload',
+                    selected_list:selectedFiles
+                });
+        }
+    </script>
+</body>
+</html>

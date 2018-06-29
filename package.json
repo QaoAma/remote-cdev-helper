@@ -1,0 +1,81 @@
+{
+    "name": "remote-cdev-helper",
+    "displayName": "remote-cdev-helper",
+    "description": "help sync file to remote, and build target",
+    "version": "0.0.1",
+    "publisher": "mq",
+    "engines": {
+        "vscode": "^1.24.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.upload"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "configuration":{
+            "type":"object",
+            "title": "upload configure",
+            "properties": {
+                "upload.localPath":{
+                    "type":"string",
+                    "default":"",
+                    "description": "local path to sync"
+                },
+                "upload.remotePath":{
+                    "type":"string",
+                    "default":"",
+                    "description": "remote path to upload"
+                },
+                "upload.username":{
+                    "type":"string",
+                    "default":"",
+                    "description": "user name to log in by ssh"
+                },
+                "upload.password":{
+                    "type":"string",
+                    "default":"",
+                    "description": "password to log in by ssh"
+                },
+                "upload.ipv4addr":{
+                    "type":"string",
+                    "default":"",
+                    "description": "remote address"
+                },
+                "upload.port":{
+                    "type":"string",
+                    "default":"22",
+                    "description": "remote listening port"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "extension.upload",
+                "title": "upload"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "@types/cheerio": "^0.22.7",
+        "@types/ssh2": "^0.5.35",
+        "cheerio": "^1.0.0-rc.2",
+        "ssh2": "^0.6.1"
+    }
+}
